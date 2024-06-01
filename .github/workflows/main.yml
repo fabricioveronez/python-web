@@ -24,5 +24,6 @@ jobs:
     scan:
       name: Scan da Imagem 
       uses: fabricioveronez/python-web/.github/workflows/scan.yml@main
+      needs: [build]
       with:
         docker_image: fabricioveronez/python-web-app:${{ github.run_number }}
