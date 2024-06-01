@@ -14,7 +14,7 @@ jobs:
             uses: docker/build-push-action@v5
             with:
                 push: true
-                context: src/
-                dockerfile: ./Dockerfile
+                context: ./src
+                dockerfile: ./src/Dockerfile
                 tags: | 
                     fabricioveronez/python-web-app:${{ github.run_number }}
