@@ -21,15 +21,8 @@ jobs:
                 dockerfile: ./src/Dockerfile
                 tags: | 
                     fabricioveronez/python-web-app:${{ github.run_number }}
-
-          - name: Run Trivy vulnerability scanner
-            uses: aquasecurity/trivy-action@0.20.0
-            with:
-              image-ref: fabricioveronez/python-web-app:${{ github.run_number }}
-              format: 'sarif'
-              output: 'trivy-results.sarif'
-
-          - name: Upload Trivy scan results to GitHub Security tab
-            uses: github/codeql-action/upload-sarif@v2
-            with:
-              sarif_file: 'trivy-results.sarif'
+    scan:
+      name: Scan da Imagem 
+      uses: fabricioveronez/python-web/.github/workflows/scan.yml@main
+      with:
+        docker_image: fabricioveronez/python-web-app:${{ github.run_number }}
