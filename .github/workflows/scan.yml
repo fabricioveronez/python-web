@@ -8,6 +8,12 @@ on:
           description: "Tag da imagem que deve ser usada para escanear"
 jobs:
     scan:
+        permissions:
+          contents: read
+          packages: write
+          id-token: write
+          security-events: write
+          actions: read
         runs-on: ubuntu-latest
         steps:
           - name: Run Trivy vulnerability scanner
