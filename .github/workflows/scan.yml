@@ -20,6 +20,7 @@ jobs:
             uses: aquasecurity/trivy-action@0.20.0
             with:
               image-ref: ${{ inputs.docker_image }}
+              scan-type: image
               format: 'sarif'
               exit-code: 0
               output: 'trivy-results.sarif'
