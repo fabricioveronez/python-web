@@ -19,7 +19,7 @@ jobs:
             with:
                 push: true
                 context: ./src
-                dockerfile: ./src/Dockerfile
+                file: ./src/Dockerfile
                 tags: | 
                     fabricioveronez/python-web-app:${{ github.run_number }}
     scan:
