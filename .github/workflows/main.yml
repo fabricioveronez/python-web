@@ -15,6 +15,6 @@ jobs:
             with:
                 push: true
                 context: src/
-                dockerfile: ./src/Dockerfile
+                dockerfile: ./Dockerfile
                 tags: | 
                     fabricioveronez/python-web-app:${{ github.run_number }}
