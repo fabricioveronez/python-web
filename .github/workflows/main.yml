@@ -23,12 +23,6 @@ jobs:
                 tags: | 
                     fabricioveronez/python-web-app:${{ github.run_number }}
     scan:
-      permissions:
-        contents: read
-        packages: write
-        id-token: write
-        security-events: write
-        actions: read
       name: Scan da Imagem 
       uses: fabricioveronez/python-web/.github/workflows/scan.yml@main
       needs: [build]
