@@ -25,7 +25,7 @@ jobs:
           - name: Executar o scan de vulnerabilidade
             uses: aquasecurity/trivy-action@0.20.0
             with:
-              image-ref: ${{ inputs.docker_image }}
+              image-ref: fabricioveronez/python-web-app:${{ github.run_number }}
               scan-type: image
               format: 'json'
               exit-code: 0
