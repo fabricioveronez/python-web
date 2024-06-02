@@ -21,15 +21,12 @@ jobs:
             with:
               image-ref: ${{ inputs.docker_image }}
               scan-type: image
-              format: 'table'
+              format: 'json'
               exit-code: 0
-              output: 'trivy-results.txt'
+              output: 'trivy-results.json'
               severity: UNKNOWN,CRITICAL,HIGH,MEDIUM,LOW
-          
-          - name: Conteúdo do Trivy
-            run: cat trivy-results.txt
-            
+
           - uses: actions/upload-artifact@v4
             with:
                 name: trivy
-                path: trivy-results.txt
+                path: trivy-results.json
