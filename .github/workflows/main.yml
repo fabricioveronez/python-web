@@ -1,7 +1,6 @@
 name: CI
 on:
     push: 
-    workflow_dispatch: 
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -19,12 +18,22 @@ jobs:
             with:
                 push: true
                 context: ./src
-                file: ./src/Dockerfile
+                dockerfile: ./src/Dockerfile
                 tags: | 
                     fabricioveronez/python-web-app:${{ github.run_number }}
-    scan:
-      name: Scan da Imagem 
-      uses: fabricioveronez/python-web/.github/workflows/scan.yml@main
-      needs: [build]
-      with:
-        docker_image: fabricioveronez/python-web-app:${{ github.run_number }}
+
+          - name: Executar o scan de vulnerabilidade
+            uses: aquasecurity/trivy-action@0.20.0
+            with:
+              image-ref: ${{ inputs.docker_image }}
+              scan-type: image
+              format: 'json'
+              exit-code: 0
+              output: 'trivy-results.json'
+              severity: UNKNOWN,CRITICAL,HIGH,MEDIUM,LOW
+
+          - name: Upload do arquivo resultado no artifact
+            uses: actions/upload-artifact@v4
+            with:
+                name: trivy
+                path: trivy-results.json
