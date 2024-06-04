@@ -1,7 +1,6 @@
 name: CI
 on:
     push: 
-    workflow_dispatch: 
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -22,9 +21,4 @@ jobs:
                 file: ./src/Dockerfile
                 tags: | 
                     fabricioveronez/python-web-app:${{ github.run_number }}
-    scan:
-      name: Scan da Imagem 
-      uses: fabricioveronez/pipe-scan/.github/workflows/main.yml@main
-      needs: [build]
-      with:
-        docker_image: fabricioveronez/python-web-app:${{ github.run_number }}
+                    fabricioveronez/python-web-app:latest
