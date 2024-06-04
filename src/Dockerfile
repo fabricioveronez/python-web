@@ -1,4 +1,4 @@
-FROM python:3.12.3
+FROM python:3.12.3-alpine3.20
 EXPOSE 5000
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
