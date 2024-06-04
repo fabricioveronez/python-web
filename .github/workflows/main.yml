@@ -23,19 +23,12 @@ jobs:
                 tags: | 
                     fabricioveronez/python-web-app:${{ github.run_number }}
                     fabricioveronez/python-web-app:latest
+    
+    scan:
+      name: Scan da Imagem
+      needs: [build]
+      uses: fabricioveronez/python-web/.github/workflows/scan.yaml@main
+      with:
+        docker_image: fabricioveronez/python-web-app:${{ github.run_number }}
 
-          - name: Executar o scan de vulnerabilidade
-            uses: aquasecurity/trivy-action@0.20.0
-            with:
-              image-ref: fabricioveronez/python-web-app:${{ github.run_number }}
-              scan-type: image
-              format: 'json'
-              exit-code: 0
-              output: 'resultado-trivy.json'
-              severity: UNKNOWN,CRITICAL,HIGH,MEDIUM,LOW
-          
-          - name: Upload do arquivo de resultado do trivy
-            uses: actions/upload-artifact@v4
-            with:
-              name: trivy
-              path: resultado-trivy.json
+
