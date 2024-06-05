@@ -27,7 +27,7 @@ jobs:
     scan:
       name: Scan da Imagem
       needs: [build]
-      uses: fabricioveronez/python-web/.github/workflows/scan.yaml@main
+      uses: fabricioveronez/exemplo-pipe-reaproveitavel/.github/workflows/scan.yaml@main
       with:
         docker_image: fabricioveronez/python-web-app:${{ github.run_number }}
 
